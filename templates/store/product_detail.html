@@ -26,7 +26,7 @@
 		</aside>
 		<main class="col-md-6 border-left">
 
-<form action="" method="POST">
+<form action="{% url 'add_cart' single_product.id %}" method="POST">
 	{% csrf_token %}
 	<article class="content-body">
 
@@ -80,14 +80,15 @@
 		{% if single_product.stock <= 0 %}
 			<h5 class="text-danger">Out of stock</h5>
 		{% else %}
-<!--			 if in_cart -->
-<!--				<a href="#" class="btn  btn-success"> <span class="text">-->
-<!--				Added to }" class="btn  btn-outline-primary"> <span class="text">-->
-<!--				View cart</span> <i class="fas fa-eye"></i></a>-->
-<!--			 else -->
+		{%  if in_cart %}
+				<a href="#" class="btn  btn-success"> <span class="text">
+				Added to cart</span> <i class="fas fa-check"></i></a>
+				<a href="{% url 'cart' %}" class="btn  btn-outline-primary"> <span class="text">
+				View cart</span> <i class="fas fa-eye"></i></a>
+				{% else %}
 			<button type="submit" class="btn  btn-primary"> <span class="text">
-			<a href="{%url 'add_cart' single_product.id %}">Add to cart</a></span> <i class="fas fa-shopping-cart"></i></button>
-<!--			 endif -->
+			Add to cart</span> <i class="fas fa-shopping-cart"></i></button>
+			{% endif %}
 		{% endif %}
 	</article> <!-- product-info-aside .// -->
 </form>
@@ -135,6 +136,7 @@
 				<p>You must be logged in to post a review <span><a href="{% url 'login' %}">Login now</a></span></p>
 			{% endif %}
 		</div>
+		
 	</form>
 	<br>
 	<header class="section-heading">
