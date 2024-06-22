@@ -26,12 +26,11 @@ def cart(request, total=0, quantity=0, cart_items=None):
                }
     return render(request, 'store/cart.html', context)
 
-def _cart_id(request):  
+def _cart_id(request):  # private function
     cart = request.session.session_key
     if not cart:
         cart = request.session.create()
     return cart
-
 
 def add_cart(request, product_id):  
     product = Product.objects.get(id=product_id)  
@@ -70,4 +69,11 @@ def remove_cart(request, product_id):
     except:
         pass
     return redirect('cart')
-          
+
+
+def remove_cart_item(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    cart = Cart.objects.get(cart_id=_cart_id(request))
+    cart_item = CartItem.objects.get(product=product, cart=cart)
+    cart_item.delete()
+    return redirect('cart')
