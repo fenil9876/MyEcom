@@ -135,7 +135,7 @@
 					</div> <!-- img-wrap.// -->
 					<figcaption class="info-wrap">
 						<div class="fix-height">
-							<a href="{{ product.get_url }}" class="title">{{ product.description }}</a>
+							<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
 							<div class="price-wrap mt-2">
 								<span class="price">${{ product.price }}</span>
 	<!--							<del class="price-old">$1980</del>-->
@@ -167,8 +167,6 @@
 					<a class="page-link"
 			  			href="#">Previous</a></li>
 			{% endif %}
-
-			
 			{% for i in products.paginator.page_range %}
 				{% if products.number == i %}
 					<li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
@@ -177,8 +175,6 @@
 						{{ i }}</a></li>
 				{% endif %}
 			{% endfor %}
-
-
 			{% if products.has_next %}
 				<li class="page-item"><a class="page-link"
 					 href="?page={{products.next_page_number}}">Next</a></li>
